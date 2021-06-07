@@ -1,0 +1,238 @@
+html {
+  transition: $transition;
+
+  &[data-theme='dark'] {
+    $body-background-color: #000000;
+    $base-input-color: #313131;
+    $base-input-color-hover: #414141;
+    $base-content-color: #212121;
+    $base-color: #c9c9c9;
+    $filter-invert: invert(1) hue-rotate(180deg);
+
+    background-color: $body-background-color !important;
+
+    .base-navbar, {
+      background-color: $body-background-color !important;
+      transition: $transition;
+      .toggle-theme {
+        background-color: $body-background-color !important;
+      }
+
+      .navbar-icon {
+        &:focus {
+          outline: none;
+          background-color: $body-background-color;
+        }
+
+        &:hover {
+          background-color: $base-input-color;
+        }
+
+        img {
+          filter: $filter-invert;
+        }
+      }
+    }
+
+    .card,
+    .sidebar-content,
+    .modal-card-foot,
+    .modal-card-body,
+    .table,
+    tr {
+      background-color: $base-content-color !important;
+    }
+
+    .table {
+      .view-details {
+        color: $base-color;
+      }
+
+      td {
+        border-bottom-color: $base-input-color-hover !important;
+      }
+    }
+
+    .brand-icon {
+      filter: $filter-invert
+    }
+
+    .base-color {
+      color: $base-color;
+    }
+
+    .snackbar {
+      background-color: $base-content-color !important;
+      color: $base-color !important;
+    }
+
+    .modal-card-body {
+      color: $base-color;
+      a {
+        &:hover {
+          color: $base-color;
+        }
+      }
+
+      pre {
+        background-color: $base-input-color;
+        color: $base-color;
+      }
+    }
+
+    .base-simple-pagination {
+      .pagination-link {
+        filter: $filter-invert;
+      }
+
+      .info {
+        color: $base-color;
+      }
+    }
+
+    .modal-card-foot {
+      border-color: $base-input-color-hover !important;
+    }
+
+    .sidebar-content {
+      .sidebar-link {
+        img {
+          filter: $filter-invert;
+        }
+      }
+
+      .menu-list {
+        li {
+          a {
+            color: $base-color;
+            &.is-active, &:hover {
+              background-color: $base-input-color;
+            }
+          }
+        }
+      }
+    }
+
+    .login-container {
+      .hr-content {
+        .hr-or {
+          border: 2px solid $base-input-color-hover !important;
+          background-color: $base-input-color !important;
+          p {
+            color: $base-color !important;
+          }
+        }
+      }
+    }
+
+    .base-navbar {
+      box-shadow: none;
+      .navbar-burger {
+        color: $base-color !important;
+        &:hover {
+          background-color: $base-input-color;
+        }
+      }
+
+      .navbar-icon {
+        p {
+          color: $base-color;
+        }
+      }
+    }
+
+    .title, .subtitle {
+      color: $base-color;
+      transition: $transition;
+    }
+
+    .table {
+      td, th {
+        color: $base-color;
+        border-color: $base-input-color-hover;
+        transition: $transition;
+      }
+    }
+
+    hr {
+      background-color: $base-input-color-hover;
+      transition: all 300ms;
+    }
+
+    .button {
+      &:not(.toggle-theme) {
+        transition: $transition;
+        filter: $filter-invert;
+      }
+    }
+
+    .field {
+      label {
+        color: $base-color;
+      }
+
+      .counter {
+        color: $base-color;
+      }
+    }
+
+    .vdpComponent {
+      .vdpInnerWrap {
+        background-color: $base-content-color;
+        .vdpHeader {
+          background-color: $base-content-color;
+        }
+
+        .vdpTimeControls {
+          background-color: $base-content-color;
+
+          .vdp12HourToggleBtn {
+
+          }
+        }
+      }
+
+      .vdpPeriodControls {
+        button {
+          color: $base-color;
+        }
+      }
+
+      .vdpCell {
+        &.selectable {
+          color: $base-color;
+        }
+
+        &.outOfRange {
+          color: $base-input-color-hover;
+        }
+      }
+    }
+
+    .base-form {
+      input, select, textarea {
+        border: 0;
+        background-color: $base-input-color;
+        box-shadow: none;
+        font-weight: bold;
+        color: $base-color;
+
+        &:hover {
+          background-color: $base-input-color-hover;
+        }
+
+        &::placeholder {
+          color: $base-color;
+        }
+      }
+
+      .select {
+        select {
+          option {
+            color: $base-color !important;
+          }
+        }
+      }
+    }
+  }
+}

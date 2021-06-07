@@ -1,0 +1,12 @@
+.button-icon {
+  margin-right: 10px;
+  .icon {
+    width: 1.2em !important;
+  }
+}
+
+.filter {
+  &-column, &-content {
+    display: none;
+  }
+}

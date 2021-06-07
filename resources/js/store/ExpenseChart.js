@@ -40,6 +40,8 @@ const actions = {
 
     axios.get(`${apiUrl}/expense-chart`, { params: state.filter })
       .then(({ data }) => {
+        console.log(Object.keys(data), 'Object.keys(data)')
+        console.log(Object.values(data), 'Object.values(data)')
         commit('setChartLabels', Object.keys(data))
         commit('setChartData', Object.values(data))
         setTimeout(() => commit('setViewChart', true), 300)

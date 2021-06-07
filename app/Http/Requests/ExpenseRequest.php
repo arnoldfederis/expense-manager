@@ -16,10 +16,7 @@ class ExpenseRequest extends FormRequest
     {
         return [
             'expense_category_id' => 'required',
-            'description' => [
-                'required',
-                Rule::unique('expenses')->ignore($this->expense)
-            ],
+            'description' => 'required',
             'amount' => 'required|numeric',
             'expense_date' => 'required|date',
         ];

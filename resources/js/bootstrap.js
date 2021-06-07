@@ -1,28 +1,59 @@
-window._ = require('lodash');
+import Vue from 'vue'
+import Axios from 'axios'
+import VueRouter from 'vue-router'
+import _ from 'lodash'
+import Form from './utils/Form'
+import Buefy from 'buefy'
+import moment from 'moment-timezone'
+import VueScrollTo from 'vue-scrollto'
+import { get } from './helpers'
 
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
+const initApp = () => {
+  const initVueUse = () => {
+    Vue.use(VueRouter);
+    Vue.use(VueScrollTo);
+    Vue.use(Buefy, {
+      defaultIconPack: 'fas',
+      defaultSnackbarPosition: 'is-top'
+    });
+  };
 
-window.axios = require('axios');
+  const initWindows = () => {
+    window.Vue = Vue;
+    window.axios = Axios;
+    window.VueRouter = VueRouter;
+    window._ = _;
+    window.Form = Form;
+    window.moment = moment
+    window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    moment.tz.setDefault('Asia/Manila');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    let token = document.head.querySelector('meta[name="csrf-token"]');
+    if (token) {
+      window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    } else {
+      console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    }
+  };
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
+  const initInterceptors = () => {
+    axios.defaults.withCredentials = true;
+    axios.interceptors.request.use((config) => {
+      let token = get('access_token');
 
-// import Echo from 'laravel-echo';
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
 
-// window.Pusher = require('pusher-js');
+      return config;
+    }, (err) => {
+      return Promise.reject(err);
+    });
+  };
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
+  initVueUse();
+  initWindows();
+  initInterceptors();
+};
+
+initApp();

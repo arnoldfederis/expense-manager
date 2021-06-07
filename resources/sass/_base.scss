@@ -1,0 +1,328 @@
+.base-content {
+  padding: 1rem;
+  .card {
+    margin-bottom: 3rem;
+    display: none;
+    border: 0 !important;
+    border-radius: 10px;
+    box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0px 0 1px rgb(10 10 10 / 2%) !important;
+    &-header-content {
+      .title {
+        margin-bottom: 0;
+      }
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+    }
+  }
+}
+
+.button {
+  font-weight: bold;
+  background-color: $base-input-color;
+  border: 0 transparent;
+
+  &:hover {
+    background-color: $base-input-color-hover;
+  }
+}
+
+.base-form {
+  input, select, textarea {
+    border: 0;
+    background-color: $base-input-color;
+    box-shadow: none;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $base-input-color-hover;
+    }
+  }
+
+  &.protocol {
+    margin-right: 5px !important;
+    .select {
+      &.is-danger {
+        &:after {
+          border-color: #3273dc !important;
+        }
+      }
+      select {
+        &:focus {
+          box-shadow: none !important;
+        }
+      }
+    }
+  }
+
+  .select {
+    &.is-empty {
+      select {
+        color: #bbbbbb !important;
+      }
+    }
+
+    &:after {
+      border-color: $primary !important;
+    }
+  }
+
+  .select, select {
+    width: 100% !important;
+  }
+}
+
+.modal {
+  &-card-title {
+    font-weight: bold;
+  }
+
+  &-card-foot {
+    background-color: white !important;
+  }
+
+  .media {
+    &-content {
+      font-weight: bold;
+      overflow-y: hidden !important;
+      pre {
+        white-space: break-spaces !important;
+      }
+    }
+  }
+}
+
+.snackbar {
+  background-color: white !important;
+  color: black !important;
+  font-weight: bold;
+  border-radius: 5px;
+  &.is-success {
+    button {
+      font-weight: bold !important;
+      background-color: #effaf3 !important;
+      color: #257942 !important;
+    }
+  }
+
+  &.is-danger {
+    button {
+      font-weight: bold !important;
+      background-color: #feecf0 !important;
+      color: #cc0f35 !important;
+    }
+  }
+}
+
+.table-wrapper {
+  td {
+    vertical-align: middle !important;
+  }
+
+  .view-details {
+    color: black;
+    text-decoration: underline;
+  }
+}
+
+.base-simple-pagination {
+  .pagination-link {
+    padding: 0 !important;
+    background-color: $base-input-color;
+    border: 0 !important;
+    &:hover {
+      background-color: $base-input-color-hover;
+    }
+  }
+}
+
+.field {
+  position: relative;
+  .help {
+    &.is-danger {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  .b-radio {
+    &.radio {
+      input[type=radio]:checked + .check {
+        border-color: $primary;
+        &:before {
+          background-color: $primary;
+        }
+      }
+
+      &:hover {
+        input[type=radio]:not(:disabled) + .check {
+          border-color: $primary;
+        }
+      }
+    }
+  }
+
+  .b-checkbox {
+    &.checkbox {
+      input[type=checkbox]:checked + .check {
+        border-color: $primary;
+        background-color: $primary !important;
+      }
+
+      &:hover {
+        input[type=checkbox]:not(:disabled) + .check {
+          border-color: $primary;
+        }
+      }
+    }
+
+  }
+}
+
+.is-copy {
+  cursor: copy;
+}
+
+.vdpComponent {
+  width: 100%;
+  display: block;
+  .vdpClearInput {
+    display: none;
+  }
+  input[readonly] {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 2.25em;
+    justify-content: flex-start;
+    line-height: 1.5;
+    padding: calc(0.375em - 1px) calc(0.625em - 1px);
+    position: relative;
+    vertical-align: top;
+    width: 100%;
+    &:focus {
+      box-shadow: 0 0 0 0.125em rgb(50 115 220 / 25%) !important;
+      outline: none;
+    }
+  }
+}
+
+.vdpInnerWrap {
+  .vdpArrowPrev {
+    &::after {
+      border-right-color: $primary;
+    }
+  }
+
+  .vdpTimeCaption {
+    font-weight: bold;
+  }
+
+  .vdpArrowNext {
+    &::after {
+      border-left-color: $primary;
+    }
+  }
+
+  .vdpPeriodControls {
+    button {
+      font-weight: bold;
+    }
+  }
+
+  .vdpHeadCell {
+    .vdpHeadCellContent {
+      font-weight: bold;
+    }
+  }
+
+  td {
+    font-weight: bold;
+    &.selected {
+      div {
+        background-color: $primary !important;
+      }
+    }
+
+    &.today {
+      div {
+        color: $primary;
+      }
+    }
+
+    &:hover {
+      div {
+        background-color: $primary !important;
+      }
+    }
+  }
+}
+
+.modal-card {
+  padding: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 14px !important;
+  }
+
+  .table {
+    .history {
+      flex-direction: row-reverse;
+      padding-bottom: 10px;
+      align-items: flex-start !important;
+      img {
+        margin-right: 0 !important;
+        margin-left: 1rem;
+      }
+    }
+  }
+}
+
+.loading-overlay {
+  height: 90vh;
+  .loading-background {
+    background-color: transparent !important;
+  }
+}
+
+.is-visible {
+  display: block !important;
+  animation-name: growIn;
+  animation-duration: 300ms;
+  animation-timing-function: transform cubic-bezier(.18,1.25,.4,1), opacity cubic-bezier(0,1,.4,1);
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  transform: translateY(60px);
+  transition: all 300ms ease !important;
+  &.show {
+    transform: translate(0);
+  }
+}
+
+.navbar-icon {
+  transform: translateX(-50px);
+  transition: all 300ms ease !important;
+  padding: .5rem 1rem !important;
+  display: flex;
+
+  img {
+    width: 25px;
+  }
+
+  &.show {
+    transform: translate(0);
+  }
+}

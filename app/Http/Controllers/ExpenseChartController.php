@@ -34,11 +34,11 @@ class ExpenseChartController extends Controller
     public function getQuery(Builder $query): Builder
     {
         if($timeFrom = request('from')) {
-            $query->where('e.updated_at', '>=', "{$timeFrom} 00:00:00");
+            $query->where('e.expense_date', '>=', "{$timeFrom} 00:00:00");
         }
 
         if($timeTo = request('to')) {
-            $query->where('e.updated_at', '<=', "{$timeTo} 23:59:59");
+            $query->where('e.expense_date', '<=', "{$timeTo} 23:59:59");
         }
 
         return $query;

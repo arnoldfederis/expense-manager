@@ -7,7 +7,7 @@ Features:
 - Expense Management
 - Simple Auth using Sanctum
 - User can change their password
-- Chart of total expense per category (to follow)
+- Chart of total expense per category
 - Vue/Vuex
 
 ## How to install

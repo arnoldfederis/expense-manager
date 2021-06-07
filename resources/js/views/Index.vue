@@ -4,42 +4,49 @@
       <div class="card-content">
         <div class="card-header-content">
           <h1 class="title has-text-weight-bold">Expenses Chart</h1>
+          <router-link class="button is-primary" :to="{ name: 'createExpense' }">Create Expense</router-link>
         </div>
 
         <hr>
 
-        <div class="filter-column is-visible">
-          <div class="columns is-multiline">
-            <div class="column">
-              <b-field>
-                <date-pick
-                    @input="updateDateFilter($event, 'from')"
-                    class="base-form"
-                    :inputAttributes="{ readonly: true }"
-                    :value="filter.from"
-                    :format="'YYYY-MM-DD'"
-                ></date-pick>
-              </b-field>
-            </div>
+        <div v-if="chartData.length > 0">
+          <div class="filter-column is-visible">
+            <div class="columns is-multiline">
+              <div class="column">
+                <b-field>
+                  <date-pick
+                      @input="updateDateFilter($event, 'from')"
+                      class="base-form"
+                      :inputAttributes="{ readonly: true }"
+                      :value="filter.from"
+                      :format="'YYYY-MM-DD'"
+                  ></date-pick>
+                </b-field>
+              </div>
 
-            <div class="column">
-              <b-field>
-                <date-pick
-                    @input="updateDateFilter($event, 'to')"
-                    class="base-form"
-                    :inputAttributes="{readonly: true}"
-                    :value="filter.to"
-                    :format="'YYYY-MM-DD'"
-                    :isDateDisabled="minDate"
-                ></date-pick>
-              </b-field>
+              <div class="column">
+                <b-field>
+                  <date-pick
+                      @input="updateDateFilter($event, 'to')"
+                      class="base-form"
+                      :inputAttributes="{readonly: true}"
+                      :value="filter.to"
+                      :format="'YYYY-MM-DD'"
+                      :isDateDisabled="minDate"
+                  ></date-pick>
+                </b-field>
+              </div>
             </div>
           </div>
+
+          <hr>
+
+          <expense-chart :chart-labels="chartLabels" :chart-data="chartData" v-if="viewChart"></expense-chart>
         </div>
 
-        <hr>
-
-        <expense-chart :chart-labels="chartLabels" :chart-data="chartData" v-if="viewChart"></expense-chart>
+        <div v-else class="base-color has-text-centered has-text-weight-bold">
+          No Records Found.
+        </div>
       </div>
     </div>
   </div>

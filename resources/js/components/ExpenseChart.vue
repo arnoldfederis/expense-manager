@@ -14,7 +14,7 @@
         :colors="['#3490dc', '#1cc88a']"
         :dataSets="this.points"
         :tooltipOptions="{
-          formatTooltipX: d => moment(d, 'YYYY-MM-DD').format('dddd, MMMM Do'),
+          formatTooltipX: d => d,
           formatTooltipY: d => `P${d}`,
         }">
     </vue-frappe>
@@ -44,15 +44,25 @@ export default {
 
   data() {
     return {
-      points: this.chartData,
+      points: [
+        {values: this.chartData}
+      ],
       labels: this.chartLabels
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 #stats > div > svg > g > g.dataset-units.dataset-line.dataset-0 > path.line-graph-path {
   stroke-width: 2px !important;
+}
+
+.chart-container {
+  .title {
+    font-size: .75rem !important;
+    font-weight: bold !important;
+    color: #919191 !important;
+  }
 }
 </style>

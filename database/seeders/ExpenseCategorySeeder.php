@@ -26,8 +26,14 @@ class ExpenseCategorySeeder extends Seeder
     protected function expenseCategory(): array
     {
         return [
-            ['name' => 'Food'],
+            ['name' => 'Food & Beverage'],
             ['name' => 'Transportation'],
+            ['name' => 'Other Expense'],
+            ['name' => 'Bills & Utilities'],
+            ['name' => 'Health & Fitness'],
+            ['name' => 'Travel'],
+            ['name' => 'Games'],
+            ['name' => 'Shopping'],
         ];
     }
 }

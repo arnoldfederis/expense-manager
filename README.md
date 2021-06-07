@@ -23,3 +23,12 @@ Features:
 - npm install && npm run dev
 ```
 
+## Auth
+```
+For admin:
+admin@admin.com
+
+For user:
+user@user.com
+
+```

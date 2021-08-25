@@ -767,6 +767,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -774,7 +780,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     filter: 'expenseChart/getFilter',
     chartLabels: 'expenseChart/getChartLabels',
     chartData: 'expenseChart/getChartData',
-    viewChart: 'expenseChart/getViewChart'
+    viewChart: 'expenseChart/getViewChart',
+    totalExpense: 'expenseChart/getTotalExpense'
   })),
   mixins: [_mixins_tableMixins__WEBPACK_IMPORTED_MODULE_0__.tableMixins],
   mounted: function mounted() {
@@ -1388,7 +1395,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['action'],
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
-    form: 'userPassword/getForm'
+    form: 'userPassword/getForm',
+    path: 'userPassword/getPath'
   })),
   mixins: [_mixins_formMixins__WEBPACK_IMPORTED_MODULE_0__.formMixins],
   mounted: function mounted() {
@@ -3771,6 +3779,7 @@ var state = function state() {
   return {
     chartLabels: [],
     chartData: [],
+    totalExpense: 0,
     filter: _mixins_stateMixins__WEBPACK_IMPORTED_MODULE_2__.defaultDateFilter,
     viewChart: false
   };
@@ -3785,6 +3794,9 @@ var getters = _objectSpread(_objectSpread({}, _mixins_getterMixins__WEBPACK_IMPO
   },
   getViewChart: function getViewChart(state) {
     return state.viewChart;
+  },
+  getTotalExpense: function getTotalExpense(state) {
+    return state.totalExpense;
   }
 });
 
@@ -3797,6 +3809,9 @@ var mutations = _objectSpread(_objectSpread({}, (0,_mixins_mutationMixins__WEBPA
   },
   setViewChart: function setViewChart(state, bool) {
     state.viewChart = bool;
+  },
+  setTotalExpense: function setTotalExpense(state, total) {
+    state.totalExpense = total;
   }
 });
 
@@ -3810,10 +3825,11 @@ var actions = {
       params: state.filter
     }).then(function (_ref2) {
       var data = _ref2.data;
-      console.log(Object.keys(data), 'Object.keys(data)');
-      console.log(Object.values(data), 'Object.values(data)');
       commit('setChartLabels', Object.keys(data));
       commit('setChartData', Object.values(data));
+      commit('setTotalExpense', _.sum(Object.values(data).map(function (expense) {
+        return parseFloat(expense);
+      })));
       setTimeout(function () {
         return commit('setViewChart', true);
       }, 300);
@@ -65859,81 +65875,100 @@ var render = function() {
         _c("hr"),
         _vm._v(" "),
         _vm.chartData.length > 0
-          ? _c(
-              "div",
-              [
-                _c("div", { staticClass: "filter-column is-visible" }, [
-                  _c("div", { staticClass: "columns is-multiline" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          [
-                            _c("date-pick", {
-                              staticClass: "base-form",
-                              attrs: {
-                                inputAttributes: { readonly: true },
-                                value: _vm.filter.from,
-                                format: "YYYY-MM-DD"
-                              },
-                              on: {
-                                input: function($event) {
-                                  return _vm.updateDateFilter($event, "from")
-                                }
+          ? _c("div", [
+              _c("div", { staticClass: "filter-column is-visible" }, [
+                _c("div", { staticClass: "columns is-multiline" }, [
+                  _c(
+                    "div",
+                    { staticClass: "column" },
+                    [
+                      _c(
+                        "b-field",
+                        [
+                          _c("date-pick", {
+                            staticClass: "base-form",
+                            attrs: {
+                              inputAttributes: { readonly: true },
+                              value: _vm.filter.from,
+                              format: "YYYY-MM-DD"
+                            },
+                            on: {
+                              input: function($event) {
+                                return _vm.updateDateFilter($event, "from")
                               }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          [
-                            _c("date-pick", {
-                              staticClass: "base-form",
-                              attrs: {
-                                inputAttributes: { readonly: true },
-                                value: _vm.filter.to,
-                                format: "YYYY-MM-DD",
-                                isDateDisabled: _vm.minDate
-                              },
-                              on: {
-                                input: function($event) {
-                                  return _vm.updateDateFilter($event, "to")
-                                }
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "column" },
+                    [
+                      _c(
+                        "b-field",
+                        [
+                          _c("date-pick", {
+                            staticClass: "base-form",
+                            attrs: {
+                              inputAttributes: { readonly: true },
+                              value: _vm.filter.to,
+                              format: "YYYY-MM-DD",
+                              isDateDisabled: _vm.minDate
+                            },
+                            on: {
+                              input: function($event) {
+                                return _vm.updateDateFilter($event, "to")
                               }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _vm.viewChart
-                  ? _c("expense-chart", {
-                      attrs: {
-                        "chart-labels": _vm.chartLabels,
-                        "chart-data": _vm.chartData
-                      }
-                    })
-                  : _vm._e()
-              ],
-              1
-            )
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _vm.viewChart
+                ? _c(
+                    "div",
+                    [
+                      _c("div", [
+                        _c(
+                          "h1",
+                          {
+                            staticClass:
+                              "subtitle has-text-weight-bold has-text-right"
+                          },
+                          [
+                            _vm._v(
+                              "Total Expenses: P" + _vm._s(_vm.totalExpense)
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("hr")
+                      ]),
+                      _vm._v(" "),
+                      _c("expense-chart", {
+                        attrs: {
+                          "chart-labels": _vm.chartLabels,
+                          "chart-data": _vm.chartData
+                        }
+                      })
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ])
           : _c(
               "div",
               {

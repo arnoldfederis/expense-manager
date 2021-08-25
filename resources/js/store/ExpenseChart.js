@@ -6,16 +6,17 @@ import { apiUrl } from '../helpers';
 const state = () => ({
   chartLabels: [],
   chartData: [],
+  totalExpense: 0,
   filter: defaultDateFilter,
   viewChart: false
 })
 
 const getters = {
   ...getterMixins,
-
   getChartLabels: state => state.chartLabels,
   getChartData: state => state.chartData,
-  getViewChart: state => state.viewChart
+  getViewChart: state => state.viewChart,
+  getTotalExpense: state => state.totalExpense
 }
 
 const mutations = {
@@ -31,6 +32,10 @@ const mutations = {
 
   setViewChart(state, bool) {
     state.viewChart = bool
+  },
+
+  setTotalExpense(state, total) {
+    state.totalExpense = total
   }
 }
 
@@ -40,10 +45,9 @@ const actions = {
 
     axios.get(`${apiUrl}/expense-chart`, { params: state.filter })
       .then(({ data }) => {
-        console.log(Object.keys(data), 'Object.keys(data)')
-        console.log(Object.values(data), 'Object.values(data)')
         commit('setChartLabels', Object.keys(data))
         commit('setChartData', Object.values(data))
+        commit('setTotalExpense', _.sum(Object.values(data).map(expense => parseFloat(expense))))
         setTimeout(() => commit('setViewChart', true), 300)
       })
       .catch((response) => {

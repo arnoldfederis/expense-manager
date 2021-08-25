@@ -44,7 +44,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      form: 'userPassword/getForm'
+      form: 'userPassword/getForm',
+      path: 'userPassword/getPath'
     })
   },
 

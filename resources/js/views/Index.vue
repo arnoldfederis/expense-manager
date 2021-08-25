@@ -15,11 +15,11 @@
               <div class="column">
                 <b-field>
                   <date-pick
-                      @input="updateDateFilter($event, 'from')"
-                      class="base-form"
-                      :inputAttributes="{ readonly: true }"
-                      :value="filter.from"
-                      :format="'YYYY-MM-DD'"
+                    @input="updateDateFilter($event, 'from')"
+                    class="base-form"
+                    :inputAttributes="{ readonly: true }"
+                    :value="filter.from"
+                    :format="'YYYY-MM-DD'"
                   ></date-pick>
                 </b-field>
               </div>
@@ -27,12 +27,12 @@
               <div class="column">
                 <b-field>
                   <date-pick
-                      @input="updateDateFilter($event, 'to')"
-                      class="base-form"
-                      :inputAttributes="{readonly: true}"
-                      :value="filter.to"
-                      :format="'YYYY-MM-DD'"
-                      :isDateDisabled="minDate"
+                    @input="updateDateFilter($event, 'to')"
+                    class="base-form"
+                    :inputAttributes="{readonly: true}"
+                    :value="filter.to"
+                    :format="'YYYY-MM-DD'"
+                    :isDateDisabled="minDate"
                   ></date-pick>
                 </b-field>
               </div>
@@ -41,7 +41,13 @@
 
           <hr>
 
-          <expense-chart :chart-labels="chartLabels" :chart-data="chartData" v-if="viewChart"></expense-chart>
+          <div v-if="viewChart">
+            <div>
+              <h1 class="subtitle has-text-weight-bold has-text-right">Total Expenses:&nbsp;P{{ totalExpense }}</h1>
+              <hr>
+            </div>
+            <expense-chart :chart-labels="chartLabels" :chart-data="chartData"></expense-chart>
+          </div>
         </div>
 
         <div v-else class="base-color has-text-centered has-text-weight-bold">
@@ -62,7 +68,8 @@ export default {
       filter: 'expenseChart/getFilter',
       chartLabels: 'expenseChart/getChartLabels',
       chartData: 'expenseChart/getChartData',
-      viewChart: 'expenseChart/getViewChart'
+      viewChart: 'expenseChart/getViewChart',
+      totalExpense: 'expenseChart/getTotalExpense',
     })
   },
 
